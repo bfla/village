@@ -1,0 +1,4 @@
+template(name='navButtons')
+  ul.nav.nav-pills
+    each tribes
+      li(role="presentation"): a(href="{{ pathFor 'tribe' _id}}")=name

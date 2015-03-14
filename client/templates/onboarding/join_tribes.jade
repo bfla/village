@@ -1,0 +1,31 @@
+template(name="joinTribes")
+  p.lead.col-md-12.text-center Who are your people?
+  form.form.col-md-8.col-md-offset-2
+    .col-md-4
+      h4.creator-text
+        fa.fa.fa-flask 
+        | Creators
+      each creators
+        .checkbox
+          label
+            input(type='checkbox')
+            =name
+    .col-md-4
+      h4.analyst-text
+        i.fa.fa-lightbulb-o
+        //- i.fa.fa-puzzle-piece
+        | Analysts
+      each analysts
+        .checkbox
+          label
+            input(type='checkbox')
+            =name
+    .col-md-4
+      h4.doer-text
+        i.fa.fa-rocket
+        | Doers
+      each doers
+        .checkbox
+          label
+            input(type='checkbox')
+            =name

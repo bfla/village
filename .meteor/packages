@@ -1,0 +1,28 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+autopublish
+insecure
+less
+coffeescript
+mquandalle:jade
+accounts-password
+accounts-ui
+accounts-facebook
+iron:router
+sacha:spin
+fortawesome:fontawesome
+dburles:factory
+aldeed:collection2
+mrt:bootstrap-alerts
+mike:mocha
+service-configuration
+peppelg:bootstrap-3-modal
+email
+bojicas:bootstrap-alerts
+mizzao:user-status
+mdg:geolocation

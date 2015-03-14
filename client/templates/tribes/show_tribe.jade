@@ -1,0 +1,10 @@
+template(name='showTribe')
+  h1.col-md-12.text-center
+    =name
+    br
+    small within 10 miles
+  if posts
+    each posts
+      +postListItem
+
+  
