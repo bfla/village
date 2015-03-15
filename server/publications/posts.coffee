@@ -5,4 +5,5 @@ Meteor.publish 'postsForTribe', (params) ->
   check(params.latitude, Number)
   check(params.longitude, Number)
   # redFlag - these should only be local posts
-  return Posts.find(params.tribeId)
+  selector = {tribeId: params.tribeId}
+  return Posts.find(selector)

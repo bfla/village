@@ -1,10 +1,10 @@
 template(name='showTribe')
-  h1.col-md-12.text-center
-    =name
-    br
-    small within 10 miles
+  h1.col-md-12.text-center=tribe.name
+  p.col-md-12.text-center: small.text-muted within 10 miles of you
   if posts
     each posts
-      +postListItem
+      .row
+        .col-md-6.col-md-offset-3.panel
+          +postListItem
 
   

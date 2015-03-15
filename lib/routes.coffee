@@ -4,25 +4,24 @@ Router.configure
   notFoundTemplate: 'notFound'
 
 # Index route ==========================================================================================
-indexOptions =
-  template: 'index'
+Router.route '/',
   name: 'index'
-Router.route '/', indexOptions
+  template: 'index'
 
 # Local tribe route ====================================================================================
 Router.route '/tribes/:_id',
   template: 'showTribe'
   name: 'tribe'
   waitOn: ()-> 
-    postsForTribeParams =
+    postsParams =
       tribeId: @params._id
-      latitude: 42.2814 #redFlag
-      longitude: -83.7483 #redFlag
-    [Meteor.subscribe('tribe', @params._id), Meteor.subscribe('postsForTribe', postsForTribeParams)]
+      longitude: UserMethods.getUserLongitude() || -83.7483 #-83.7483 #redFlag this.params.query.longitude
+      latitude: UserMethods.getUserLatitude() || 42.2814 #42.2814 #redFlag this.params.query.latitude
+    [Meteor.subscribe('tribe', @params._id), Meteor.subscribe('postsForTribe', postsParams)]
   data: ()-> 
     data =
       tribe: Tribes.findOne(@params._id)
-      posts: Posts.find()
+      posts: Posts.find({tribeId: @params._id})
 
 # User tribe selection route ==========================================================================
 Router.route '/joinTribes',
@@ -33,14 +32,18 @@ Router.route '/joinTribes',
 
 # Helpers ================================================================================
 
-requireLogin = () ->
-  if !Meteor.user()
-    if Meteor.loggingIn()
-      this.render(this.loadingTemplate)
-    else
-      this.render('index')
-  else
-    this.next()
+# requireLogin = () ->
+#   if !Meteor.userId()
+#     if Meteor.loggingIn()
+#       @render(@loadingTemplate)
+#     else
+#       @render('index')
+#   else
+#     this.next()
 
-# Router.onBeforeAction(requireLogin, {only: 'newMessage'})
-Router.onBeforeAction(requireLogin, {only: ['nearbyMatches', 'home', 'history', 'storyDetail']})
+# requireTribeSelection = ()->
+  # if 
+
+# Require login before doing stuff!
+# Router.onBeforeAction ()-> requireLogin()
+

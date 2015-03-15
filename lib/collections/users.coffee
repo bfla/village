@@ -7,7 +7,7 @@ updateUserLocation = (params)->
   user = Meteor.users.findOne(Meteor.userId())
   geojson = user.currentLocation
   geojson ||= initGeojson()
-  geojson.coordinates = [params.latitude, params.longitude]
+  geojson.geometry.coordinates = [params.latitude, params.longitude]
 
   selector = {_id: user._id}
   updateOperation = {$set: {'geojson': geojson} }
@@ -15,7 +15,21 @@ updateUserLocation = (params)->
 
 initGeojson = ()->
   geojson =
-    type: "Point"
-    coordinates: null
-    properties : {}
+    type: "Feature"
+    geometry: 
+      type: "Point"
+      coordinates: []
+      properties : {}
 
+@UserMethods = {}
+
+UserMethods.getUserLongitude = ()->
+  return null unless Meteor.users.findOne(Meteor.userId())
+  user = Meteor.users.findOne(Meteor.userId())
+  console.log "userObj:", user
+  longitude = user.profile.currentLocation.geometry.coordinates[0]
+
+UserMethods.getUserLatitude = ()->
+  return null unless Meteor.users.findOne(Meteor.userId())
+  user = Meteor.users.findOne(Meteor.userId())
+  latitude = user.profile.currentLocation.geometry.coordinates[1]

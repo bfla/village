@@ -1,18 +1,5 @@
 @Posts = new Mongo.Collection('posts')
 
-GeojsonSchema = new SimpleSchema
-  type:
-    type: String
-    allowedValues: ['Point']
-  coordinates:
-    type: [Number]
-    decimal: true
-    minCount: 2
-    maxCount: 2
-  properties: 
-    type: Object
-    optional: true
-
 PostSchema = new SimpleSchema
   userId:
     type: String
@@ -20,15 +7,10 @@ PostSchema = new SimpleSchema
     type: String
   text:
     type: String
-  # attachment:
-  #   type: String
-  #   optional: true
-  # latitude:
-  #   type: Number
-  # longitude:
-  #   type: Number
   geoJson:
-    type: GeojsonSchema
+    type: Object
+    optional: true # redFlag - because it was throwing mysterious errors
+    # type: SharedSchemas.Geojson
   createdAt:
     type: Date
   updatedAt:
